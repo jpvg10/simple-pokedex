@@ -1,7 +1,8 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 function Explore() {
-  return <div>Explore</div>;
+  return <Typography paragraph>Explore</Typography>;
 }
 
 export default Explore;

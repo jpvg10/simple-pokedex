@@ -6,18 +6,20 @@ import Footer from '../Footer';
 import Home from '../Home';
 import Navbar from '../Navbar';
 import RandomTeam from '../RandomTeam';
-import './App.css';
+import { Container } from '@material-ui/core';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/compare" exact component={Compare} />
-        <Route path="/explore" exact component={Explore} />
-        <Route path="/random-team" exact component={RandomTeam} />
-      </Switch>
+      <Container>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/compare" exact component={Compare} />
+          <Route path="/explore" exact component={Explore} />
+          <Route path="/random-team" exact component={RandomTeam} />
+        </Switch>
+      </Container>
       <Footer />
     </div>
   );
