@@ -8,11 +8,11 @@ import Navbar from '../Navbar';
 import RandomTeam from '../RandomTeam';
 import { Container } from '@material-ui/core';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Navbar />
-      <Container>
+      <Container maxWidth="md">
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/compare" exact component={Compare} />
@@ -23,6 +23,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

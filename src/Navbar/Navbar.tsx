@@ -6,29 +6,36 @@ const useStyles = makeStyles((theme: Theme) => ({
   offset: theme.mixins.toolbar,
   title: {
     flexGrow: 1
+  },
+  navText: {
+    textTransform: 'capitalize',
+    letterSpacing: 'unset'
+  },
+  titleButon: {
+    fontSize: '32px'
   }
 }));
 
-function Navbar() {
+const Navbar: React.FC = () => {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <AppBar>
-        <Container>
+        <Container maxWidth="md">
           <Toolbar disableGutters>
             <div className={classes.title}>
-              <Button color="inherit" component={Link} to="/">
+              <Button color="inherit" className={`${classes.navText} ${classes.titleButon}`} component={Link} to="/">
                 Simple Pokédex
               </Button>
             </div>
-            <Button color="inherit" component={Link} to="/explore">
+            <Button color="inherit" className={classes.navText} component={Link} to="/explore">
               Explore Pokédex
             </Button>
-            <Button color="inherit" component={Link} to="/compare">
+            <Button color="inherit" className={classes.navText} component={Link} to="/compare">
               Compare Pokémon
             </Button>
-            <Button color="inherit" component={Link} to="/random-team">
+            <Button color="inherit" className={classes.navText} component={Link} to="/random-team">
               Random Pokémon Team
             </Button>
           </Toolbar>
@@ -37,6 +44,6 @@ function Navbar() {
       <div className={classes.offset} />
     </React.Fragment>
   );
-}
+};
 
 export default Navbar;
