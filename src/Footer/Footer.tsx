@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, AppBar, Container, Typography, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  appBar: {
+  footer: {
     top: 'auto',
     bottom: 0
   },
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <AppBar className={classes.appBar}>
+    <AppBar className={classes.footer} position="static">
       <Container maxWidth="md">
         <div className={classes.flexContainer}>
           <div>

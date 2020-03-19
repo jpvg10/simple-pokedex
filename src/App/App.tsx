@@ -6,13 +6,27 @@ import Footer from '../Footer';
 import Home from '../Home';
 import Navbar from '../Navbar';
 import RandomTeam from '../RandomTeam';
-import { Container } from '@material-ui/core';
+import { Container, makeStyles, Theme } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  app: {
+    display: 'flex',
+    minHeight: '100vh',
+    flexDirection: 'column'
+  },
+  container: {
+    flex: '1 0 auto',
+    paddingTop: '68px'
+  }
+}));
 
 const App: React.FC = () => {
+  const classes = useStyles();
+
   return (
-    <div className="App">
+    <div className={classes.app}>
       <Navbar />
-      <Container maxWidth="md">
+      <Container maxWidth="md" className={classes.container}>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/compare" exact component={Compare} />
