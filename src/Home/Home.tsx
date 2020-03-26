@@ -14,10 +14,10 @@ const Home: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <div>
+    <React.Fragment>
       <Typography variant="h3">Welcome to the Simple Pokédex</Typography>
       <img src={pokeball} alt="Pokéball" className={classes.image} />
-    </div>
+    </React.Fragment>
   );
 };
 
