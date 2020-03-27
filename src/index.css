@@ -1,3 +1,11 @@
 body {
     margin: 0;
 }
+
+h3 {
+    margin: 1.46rem 0 1.168rem !important;
+}
+
+h5 {
+    margin: 0.82rem 0 0.656rem 0 !important;
+}

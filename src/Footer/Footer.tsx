@@ -4,7 +4,8 @@ import { makeStyles, Theme, AppBar, Container, Typography, Link } from '@materia
 const useStyles = makeStyles((theme: Theme) => ({
   footer: {
     top: 'auto',
-    bottom: 0
+    bottom: 0,
+    marginTop: '20px'
   },
   flexContainer: {
     display: 'flex',
