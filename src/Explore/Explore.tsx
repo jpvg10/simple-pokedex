@@ -15,7 +15,8 @@ import pokedex from './pokedex.png';
 const useStyles = makeStyles((theme: Theme) => ({
   image: {
     width: '100%',
-    height: 'auto'
+    height: 'auto',
+    maxWidth: '400px'
   },
   card: {
     paddingBottom: '16px !important'
