@@ -1,23 +1,15 @@
 {
-  "arrowParens": "avoid",
-  "bracketSpacing": true,
-  "disableLanguages": [
-    "vue"
-  ],
-  "endOfLine": "auto",
-  "eslintIntegration": true,
-  "ignorePath": ".prettierrc.json",
-  "jsxBracketSameLine": false,
-  "jsxSingleQuote": false,
-  "parser": "babel",
   "printWidth": 120,
-  "proseWrap": "preserve",
-  "requireConfig": false,
+  "tabWidth": 2,
+  "useTabs": false,
   "semi": true,
   "singleQuote": true,
-  "stylelintIntegration": false,
-  "tabWidth": 2,
+  "jsxSingleQuote": false,
   "trailingComma": "none",
-  "tslintIntegration": false,
-  "useTabs": false
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "parser": "typescript",
+  "proseWrap": "preserve",
+  "endOfLine": "auto"
 }

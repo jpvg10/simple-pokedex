@@ -44,7 +44,9 @@ const Compare: React.FC = () => {
               onChange={handler(0)}
             >
               {pokemonList.map((name, index) => (
-                <MenuItem value={index} key={index}>{name}</MenuItem>
+                <MenuItem value={index} key={index}>
+                  {name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -59,7 +61,9 @@ const Compare: React.FC = () => {
               onChange={handler(1)}
             >
               {pokemonList.map((name, index) => (
-                <MenuItem value={index} key={index}>{name}</MenuItem>
+                <MenuItem value={index} key={index}>
+                  {name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
