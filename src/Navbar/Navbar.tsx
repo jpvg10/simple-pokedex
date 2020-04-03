@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Container, makeStyles, Theme } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Container, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1
   },

@@ -6,9 +6,9 @@ import Footer from '../Footer';
 import Home from '../Home';
 import Navbar from '../Navbar';
 import RandomTeam from '../RandomTeam';
-import { Container, makeStyles, Theme } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   app: {
     display: 'flex',
     minHeight: '100vh',

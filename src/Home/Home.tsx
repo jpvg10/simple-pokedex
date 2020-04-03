@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography, Theme, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 import pokeball from './pokeball.png';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   image: {
     width: '100%',
     height: 'auto',

@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-  Typography,
-  Grid,
-  makeStyles,
-  Theme,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button
-} from '@material-ui/core';
+import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   image: {
     width: '100%',
     height: 'auto',
@@ -30,7 +20,7 @@ const RandomTeam: React.FC = () => {
 
   const [pokedex, setPokedex] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     setPokedex(event.target.value as number);
   };
 

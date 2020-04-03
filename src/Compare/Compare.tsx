@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  makeStyles,
-  Theme,
-  Grid,
-  Button
-} from '@material-ui/core';
+import { Typography, FormControl, InputLabel, Select, MenuItem, makeStyles, Grid, Button } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   select: {
     minWidth: '100%'
   }
@@ -24,7 +14,7 @@ const Compare: React.FC = () => {
 
   const [selected, setSelected] = React.useState([0, 0]);
 
-  const handler = (index: number) => (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handler = (index: number) => (event: React.ChangeEvent<{ value: unknown }>): void => {
     const newSelected = [...selected];
     newSelected[index] = event.target.value as number;
     setSelected(newSelected);

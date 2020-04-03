@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-  Typography,
-  Grid,
-  makeStyles,
-  Theme,
-  List,
-  ListItem,
-  ListItemText,
-  Card,
-  CardContent
-} from '@material-ui/core';
+import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   image: {
     width: '100%',
     height: 'auto',

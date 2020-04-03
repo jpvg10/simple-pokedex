@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme, AppBar, Container, Typography, Link } from '@material-ui/core';
+import { makeStyles, AppBar, Container, Typography, Link } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   footer: {
     top: 'auto',
     bottom: 0,
