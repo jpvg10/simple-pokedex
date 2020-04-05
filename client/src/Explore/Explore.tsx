@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
+import { getPoxedexes } from '../Api';
+
+interface Pokedex {
+  id: string;
+  name: string;
+}
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -9,12 +15,23 @@ const useStyles = makeStyles(() => ({
     maxWidth: '400px'
   },
   card: {
-    paddingBottom: '16px !important'
+    paddingBottom: '16px !important',
+    textTransform: 'capitalize'
   }
 }));
 
 const Explore: React.FC = () => {
   const classes = useStyles();
+
+  const [pokedexes, setPokedexes] = useState([] as Pokedex[]);
+
+  useEffect(() => {
+    const loadPokedex = async () => {
+      const result = await getPoxedexes();
+      setPokedexes(result);
+    };
+    loadPokedex();
+  }, []);
 
   return (
     <React.Fragment>
@@ -24,12 +41,11 @@ const Explore: React.FC = () => {
           <Card>
             <CardContent className={classes.card}>
               <List component="nav" aria-label="main mailbox folders">
-                <ListItem button>
-                  <ListItemText primary="National" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary="Kanto" />
-                </ListItem>
+                {pokedexes.map((pokedex) => (
+                  <ListItem button key={pokedex.id}>
+                    <ListItemText primary={pokedex.name} />
+                  </ListItem>
+                ))}
               </List>
             </CardContent>
           </Card>

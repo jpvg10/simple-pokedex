@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
-import { getPokedex } from '../controller';
+import { getPokedexes, getPokedex } from '../controller';
 
 const router = express.Router();
+
+router.get('/pokedex/', getPokedexes);
 
 router.get('/pokedex/:name', getPokedex);
 
