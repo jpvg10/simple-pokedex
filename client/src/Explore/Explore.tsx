@@ -3,7 +3,7 @@ import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardC
 import pokedex from './pokedex.png';
 import { getPoxedexes } from '../Api';
 
-interface Pokedex {
+interface IPokedex {
   id: string;
   name: string;
 }
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
 const Explore: React.FC = () => {
   const classes = useStyles();
 
-  const [pokedexes, setPokedexes] = useState([] as Pokedex[]);
+  const [pokedexes, setPokedexes] = useState([] as IPokedex[]);
 
   useEffect(() => {
     const loadPokedex = async () => {

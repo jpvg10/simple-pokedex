@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
+import { getPoxedexes } from '../Api';
+
+interface IPokedex {
+  id: string;
+  name: string;
+}
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -9,19 +15,31 @@ const useStyles = makeStyles(() => ({
     maxWidth: '400px'
   },
   select: {
-    minWidth: '100%'
+    minWidth: '100%',
+    textTransform: 'capitalize'
+  },
+  menuItem: {
+    textTransform: 'capitalize'
   }
 }));
 
 const RandomTeam: React.FC = () => {
   const classes = useStyles();
 
-  const pokedexList = ['National', 'Kanto'];
+  const [pokedexes, setPokedexes] = useState([] as IPokedex[]);
+  const [selectedPokedex, setSelectedPokedex] = useState('');
 
-  const [pokedex, setPokedex] = React.useState(0);
+  useEffect(() => {
+    const loadPokedex = async () => {
+      const result = await getPoxedexes();
+      setPokedexes(result);
+      setSelectedPokedex(result[0].id);
+    };
+    loadPokedex();
+  }, []);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    setPokedex(event.target.value as number);
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedPokedex(event.target.value as string);
   };
 
   return (
@@ -31,16 +49,16 @@ const RandomTeam: React.FC = () => {
         <Grid container spacing={2} item xs={12} md={8}>
           <Grid item xs={10}>
             <FormControl className={classes.select}>
-              <InputLabel id="demo-simple-select-label">Pick a Pokédex</InputLabel>
+              <InputLabel id="pokedex-select-label">Pick a Pokédex</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={pokedex}
+                labelId="pokedex-select-label"
+                id="pokedex-select"
+                value={selectedPokedex}
                 onChange={handleChange}
               >
-                {pokedexList.map((name, index) => (
-                  <MenuItem value={index} key={index}>
-                    {name}
+                {pokedexes.map((pokedex) => (
+                  <MenuItem value={pokedex.id} key={pokedex.id} className={classes.menuItem}>
+                    {pokedex.name}
                   </MenuItem>
                 ))}
               </Select>
