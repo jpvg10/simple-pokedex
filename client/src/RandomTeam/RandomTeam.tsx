@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
 import { getPoxedexes } from '../Api';
-
-interface IPokedex {
-  id: string;
-  name: string;
-}
+import { IPokedex } from '../Common';
 
 const useStyles = makeStyles(() => ({
   image: {

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
 import { getPoxedexes } from '../Api';
-
-interface IPokedex {
-  id: string;
-  name: string;
-}
+import { IPokedex } from '../Common';
 
 const useStyles = makeStyles(() => ({
   image: {
