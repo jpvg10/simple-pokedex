@@ -133,7 +133,7 @@ export const getRandomTeam: RequestHandler = async (req, res) => {
     const arrayPokemon = pokemonResponses.map((response) => {
       return {
         name: response.data.name,
-        front: response.data.sprites.front_default
+        pictureUrl: response.data.sprites.front_default
       };
     });
 

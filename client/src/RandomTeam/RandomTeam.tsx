@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
-import { getPoxedexes } from '../Api';
-import { IPokedex } from '../Common';
+import Pokemon from './Pokemon';
+import { getPoxedexes, getRandomTeam } from '../Api';
+import { IPokedex, IPokemonPicture } from '../Common';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -38,6 +39,19 @@ const RandomTeam: React.FC = () => {
     setSelectedPokedex(event.target.value as string);
   };
 
+  const [team, setTeam] = useState<IPokemonPicture[]>([]);
+
+  const onClickGo = async () => {
+    const randomTeam = await getRandomTeam(selectedPokedex);
+    setTeam(randomTeam);
+  };
+
+  const teamElements = team.map((poke) => (
+    <Grid item>
+      <Pokemon {...poke} />
+    </Grid>
+  ));
+
   return (
     <React.Fragment>
       <Typography variant="h3">Get a random Pokémon Team</Typography>
@@ -61,7 +75,7 @@ const RandomTeam: React.FC = () => {
             </FormControl>
           </Grid>
           <Grid item xs={2}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={onClickGo}>
               Go!
             </Button>
           </Grid>
@@ -69,6 +83,9 @@ const RandomTeam: React.FC = () => {
         <Grid item xs={12} md={4}>
           <img src={badges} alt="Pokéball" className={classes.image} />
         </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        {teamElements}
       </Grid>
       <Typography variant="h5">Can you beat the Elite Four with this team?</Typography>
     </React.Fragment>

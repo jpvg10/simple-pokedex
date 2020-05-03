@@ -12,3 +12,8 @@ export interface IPokedexDetail {
   name: string;
   pokemon: IPokemonBasic[];
 }
+
+export interface IPokemonPicture {
+  name: string;
+  pictureUrl: string;
+}

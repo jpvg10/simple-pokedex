@@ -9,6 +9,6 @@ router.get('/pokedex/:name', getPokedexDetail);
 
 router.get('/pokemon/:name', getPokemon);
 
-router.get('/random_team/:pokedex', getRandomTeam);
+router.get('/random-team/:pokedex', getRandomTeam);
 
 export default router;
