@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express';
-import { getPokedexes, getPokemonFromPokedex, getPokemon, getRandomTeam } from '../controller';
+import express from 'express';
+import { getPokedexes, getPokedexDetail, getPokemon, getRandomTeam } from '../controller';
 
 const router = express.Router();
 
 router.get('/pokedex/', getPokedexes);
 
-router.get('/pokemon/', getPokemonFromPokedex);
+router.get('/pokedex/:name', getPokedexDetail);
 
 router.get('/pokemon/:name', getPokemon);
 

@@ -16,19 +16,12 @@ export const getPokedexes: RequestHandler = async (req, res) => {
   }
 };
 
-export const getPokemonFromPokedex: RequestHandler = async (req, res) => {
+export const getPokedexDetail: RequestHandler = async (req, res) => {
   try {
-    const pokedexName = req.query.pokedex;
-
-    if (!pokedexName) {
-      res.status(400).send({
-        message: 'Provide query parameter "pokedex"'
-      });
-    }
-
+    const pokedexName = req.params.name;
     const result = await axios.get(`https://pokeapi.co/api/v2/pokedex/${pokedexName}/`);
-
     const pokedex = result.data;
+
     const arrayPokemon = pokedex.pokemon_entries.map((pokemon: any) => {
       return {
         id: pokemon.entry_number,
@@ -36,7 +29,12 @@ export const getPokemonFromPokedex: RequestHandler = async (req, res) => {
       };
     });
 
-    res.status(200).send(arrayPokemon);
+    const pokedexData = {
+      name: pokedex.name.replace('-', ' '),
+      pokemon: arrayPokemon
+    };
+
+    res.status(200).send(pokedexData);
   } catch (e) {
     res.status(500).send(e);
   }
