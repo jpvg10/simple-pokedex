@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
 import { getPoxedexes } from '../Api';
@@ -38,9 +39,11 @@ const Explore: React.FC = () => {
             <CardContent className={classes.card}>
               <List component="nav" aria-label="main mailbox folders">
                 {pokedexes.map((pokedex) => (
-                  <ListItem button key={pokedex.id}>
-                    <ListItemText primary={pokedex.name} />
-                  </ListItem>
+                  <Link to={`/pokedex-details/${pokedex.id}`} key={pokedex.id}>
+                    <ListItem button>
+                      <ListItemText primary={pokedex.name} />
+                    </ListItem>
+                  </Link>
                 ))}
               </List>
             </CardContent>
