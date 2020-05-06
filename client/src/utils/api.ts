@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IPokedex, IPokedexDetail, IPokemonPicture } from './interfaces';
+import { IPokedex, IPokedexDetail, IPokemonPicture, IPokemonDetail } from './interfaces';
 
 export const getPoxedexes = async (): Promise<IPokedex[]> => {
   try {
@@ -28,5 +28,15 @@ export const getRandomTeam = async (pokedex: string): Promise<IPokemonPicture[]>
   } catch (e) {
     console.error(e);
     return [];
+  }
+};
+
+export const getPokemonDetail = async (pokemon: string): Promise<IPokemonDetail | null> => {
+  try {
+    const result = await axios.get<IPokemonDetail>(`/api/pokemon/${pokemon}/`);
+    return result.data;
+  } catch (e) {
+    console.error(e);
+    return null;
   }
 };

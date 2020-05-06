@@ -101,8 +101,8 @@ export const getPokemon: RequestHandler = async (req, res) => {
     const pokemonData = {
       name: pokemon.name,
       number: pokemon.id,
-      front: pokemon.sprites.front_default,
-      back: pokemon.sprites.back_default,
+      frontPictureUrl: pokemon.sprites.front_default,
+      backPictureUrl: pokemon.sprites.back_default,
       types: arrayTypes,
       stats: arrayStats,
       abilities: arrayAbilities,
