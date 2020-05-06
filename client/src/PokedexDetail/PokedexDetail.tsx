@@ -15,8 +15,8 @@ import {
   Input,
   InputAdornment
 } from '@material-ui/core';
-import { getPokedexDetail } from '../Api';
-import { IPokedexDetail, IPokemonBasic } from '../Common';
+import { getPokedexDetail } from '../utils/api';
+import { IPokedexDetail, IPokemonBasic } from '../utils/interfaces';
 
 const useStyles = makeStyles({
   capitalize: {

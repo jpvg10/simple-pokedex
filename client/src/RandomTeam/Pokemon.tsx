@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPokemonPicture } from '../Common';
+import { IPokemonPicture } from '../utils/interfaces';
 import { makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({

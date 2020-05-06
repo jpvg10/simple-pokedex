@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
 import Pokemon from './Pokemon';
-import { getPoxedexes, getRandomTeam } from '../Api';
-import { IPokedex, IPokemonPicture } from '../Common';
+import { getPoxedexes, getRandomTeam } from '../utils/api';
+import { IPokedex, IPokemonPicture } from '../utils/interfaces';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
 const RandomTeam: React.FC = () => {
   const classes = useStyles();
 
-  const [pokedexes, setPokedexes] = useState([] as IPokedex[]);
+  const [pokedexes, setPokedexes] = useState<IPokedex[]>([]);
   const [selectedPokedex, setSelectedPokedex] = useState('');
 
   useEffect(() => {
@@ -46,12 +46,6 @@ const RandomTeam: React.FC = () => {
     setTeam(randomTeam);
   };
 
-  const teamElements = team.map((poke) => (
-    <Grid item>
-      <Pokemon {...poke} />
-    </Grid>
-  ));
-
   return (
     <React.Fragment>
       <Typography variant="h3">Get a random Pokémon Team</Typography>
@@ -66,7 +60,7 @@ const RandomTeam: React.FC = () => {
                 value={selectedPokedex}
                 onChange={handleChange}
               >
-                {pokedexes.map((pokedex) => (
+                {pokedexes.map((pokedex: IPokedex) => (
                   <MenuItem value={pokedex.id} key={pokedex.id} className={classes.menuItem}>
                     {pokedex.name}
                   </MenuItem>
@@ -85,7 +79,11 @@ const RandomTeam: React.FC = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2}>
-        {teamElements}
+        {team.map((poke: IPokemonPicture) => (
+          <Grid item>
+            <Pokemon {...poke} />
+          </Grid>
+        ))}
       </Grid>
       <Typography variant="h5">Can you beat the Elite Four with this team?</Typography>
     </React.Fragment>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IPokedex, IPokedexDetail, IPokemonPicture } from '../Common';
+import { IPokedex, IPokedexDetail, IPokemonPicture } from './interfaces';
 
 export const getPoxedexes = async (): Promise<IPokedex[]> => {
   try {
