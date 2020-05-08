@@ -50,7 +50,7 @@ export const getPokemon: RequestHandler = async (req, res) => {
 
     const arrayStats = pokemon.stats.map((stat: any) => {
       return {
-        name: stat.stat.name,
+        name: stat.stat.name.replace('-', ' '),
         baseStat: stat.base_stat
       };
     });

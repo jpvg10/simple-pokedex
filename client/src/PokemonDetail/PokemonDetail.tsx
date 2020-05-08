@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, makeStyles, Grid } from '@material-ui/core';
 import StatProgressBar from './StatProgressBar';
+import Defense from './Defense';
 import TypeLabel from './TypeLabel';
 import { getPokemonDetail } from '../utils/api';
 import { IPokemonDetail, IDefense, IStat } from '../utils/interfaces';
@@ -50,20 +51,18 @@ const PokemonDetail: React.FC = () => {
         <img src={pokemonDetail?.backPictureUrl} />
       </div>
       <Typography variant="h5">National #{pokemonDetail?.number}</Typography>
-      <Grid container spacing={2}>
-        <Grid item>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm="auto" md={6}>
           <Typography variant="h4">Base stats</Typography>
           {pokemonDetail?.stats.map((stat: IStat) => (
             <StatProgressBar {...stat} />
           ))}
         </Grid>
-        <Grid item>
+        <Grid item xs={12} sm="auto" md={6}>
           <Typography variant="h4">Defenses</Typography>
+          <Typography paragraph>The effect that different types of attack have on this Pokémon</Typography>
           {pokemonDetail?.defenses.map((def: IDefense) => (
-            <React.Fragment>
-              <TypeLabel type={def.type} />
-              <span>{def.value}</span>
-            </React.Fragment>
+            <Defense {...def} />
           ))}
         </Grid>
       </Grid>
