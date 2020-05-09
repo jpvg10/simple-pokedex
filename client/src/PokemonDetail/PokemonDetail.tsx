@@ -17,6 +17,10 @@ const useStyles = makeStyles({
   formControl: {
     minWidth: '100%',
     marginBottom: '20px'
+  },
+  center: {
+    display: 'flex',
+    alignItems: 'center'
   }
 });
 
@@ -41,28 +45,30 @@ const PokemonDetail: React.FC = () => {
       <Typography variant="h3" className={classes.capitalize}>
         {pokemonDetail?.name}
       </Typography>
-      <div>
-        {pokemonDetail?.types.map((type: string) => (
-          <TypeLabel type={type} />
-        ))}
-      </div>
-      <div>
-        <img src={pokemonDetail?.frontPictureUrl} />
-        <img src={pokemonDetail?.backPictureUrl} />
-      </div>
+      <Grid container spacing={4}>
+        <Grid item>
+          <img src={pokemonDetail?.frontPictureUrl} alt="Pokemon front" />
+          <img src={pokemonDetail?.backPictureUrl} alt="Pokemon back" />
+        </Grid>
+        <Grid item className={classes.center}>
+          {pokemonDetail?.types.map((type: string, index: number) => (
+            <TypeLabel key={index} type={type} />
+          ))}
+        </Grid>
+      </Grid>
       <Typography variant="h5">National #{pokemonDetail?.number}</Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} sm="auto" md={6}>
           <Typography variant="h4">Base stats</Typography>
-          {pokemonDetail?.stats.map((stat: IStat) => (
-            <StatProgressBar {...stat} />
+          {pokemonDetail?.stats.map((stat: IStat, index: number) => (
+            <StatProgressBar key={index} {...stat} />
           ))}
         </Grid>
         <Grid item xs={12} sm="auto" md={6}>
           <Typography variant="h4">Defenses</Typography>
           <Typography paragraph>The effect that different types of attack have on this Pokémon</Typography>
-          {pokemonDetail?.defenses.map((def: IDefense) => (
-            <Defense {...def} />
+          {pokemonDetail?.defenses.map((def: IDefense, index: number) => (
+            <Defense key={index} {...def} />
           ))}
         </Grid>
       </Grid>

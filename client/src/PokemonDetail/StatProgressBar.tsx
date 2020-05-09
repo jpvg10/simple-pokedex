@@ -8,19 +8,25 @@ const useStyles = makeStyles({
     marginBottom: '0'
   },
   container: {
-    height: '24px',
+    height: '21px',
     width: '200px',
-    border: '1px solid black',
-    marginBottom: '15px'
+    marginBottom: '15px',
+    backgroundColor: '#D2D2FB',
+    borderRadius: '4px'
   },
   filler: {
     height: '100%',
     width: (props: any) => (props.baseStat / 140) * 200,
-    backgroundColor: 'blue',
+    backgroundColor: '#5F5FFD',
     color: 'white',
-    paddingLeft: '10px',
+    borderTopLeftRadius: '4px',
+    borderBottomLeftRadius: '4px',
+    borderTopRightRadius: '2px',
+    borderBottomRightRadius: '2px',
     '& p': {
-      marginBottom: '0'
+      paddingLeft: '6px',
+      marginBottom: '0',
+      fontSize: '14px'
     }
   }
 });
