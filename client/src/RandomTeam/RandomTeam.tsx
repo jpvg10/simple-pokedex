@@ -77,7 +77,7 @@ const RandomTeam: React.FC = () => {
       </Grid>
       <Grid container spacing={2}>
         {team.map((poke: IPokemonPicture) => (
-          <Grid item>
+          <Grid item key={poke.name}>
             <Pokemon {...poke} />
           </Grid>
         ))}

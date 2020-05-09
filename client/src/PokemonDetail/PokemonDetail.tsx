@@ -48,8 +48,8 @@ const PokemonDetail: React.FC = () => {
           <img src={pokemonDetail?.backPictureUrl} alt="Pokemon back" />
         </Grid>
         <Grid item className={classes.center}>
-          {pokemonDetail?.types.map((type: string, index: number) => (
-            <TypeLabel key={index} type={type} />
+          {pokemonDetail?.types.map((type: string) => (
+            <TypeLabel key={type} type={type} />
           ))}
         </Grid>
       </Grid>
@@ -57,15 +57,15 @@ const PokemonDetail: React.FC = () => {
       <Grid container spacing={4}>
         <Grid item xs={12} sm="auto" md={6}>
           <Typography variant="h4">Base stats</Typography>
-          {pokemonDetail?.stats.map((stat: IStat, index: number) => (
-            <StatProgressBar key={index} {...stat} />
+          {pokemonDetail?.stats.map((stat: IStat) => (
+            <StatProgressBar key={stat.name} {...stat} />
           ))}
         </Grid>
         <Grid item xs={12} sm="auto" md={6}>
           <Typography variant="h4">Defenses</Typography>
           <Typography paragraph>The effect that different types of attack have on this Pokémon</Typography>
-          {pokemonDetail?.defenses.map((def: IDefense, index: number) => (
-            <Defense key={index} {...def} />
+          {pokemonDetail?.defenses.map((def: IDefense) => (
+            <Defense key={def.type} {...def} />
           ))}
         </Grid>
       </Grid>
