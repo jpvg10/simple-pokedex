@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import {
   Typography,
   TableContainer,
@@ -9,20 +9,19 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  makeStyles,
   FormControl,
   InputLabel,
   Input,
-  InputAdornment
+  InputAdornment,
+  withStyles
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import debounce from 'lodash.debounce';
+import PokemonElements from './PokemonElements';
 import { getPokedexDetail } from '../utils/api';
-import { IPokedexDetail, IPokemonBasic } from '../utils/interfaces';
+import { IPokemonBasic, IPokedexDetail } from '../utils/interfaces';
 
-const useStyles = makeStyles({
-  capitalize: {
-    textTransform: 'capitalize'
-  },
+const styles = () => ({
   table: {
     minWidth: 650
   },
@@ -32,79 +31,93 @@ const useStyles = makeStyles({
   }
 });
 
-const PokedexDetail: React.FC = () => {
-  const classes = useStyles();
+interface PokedexDetailState {
+  name: string;
+  query: string;
+  pokemonToDisplay: IPokemonBasic[];
+}
 
-  const { pokedex } = useParams();
+interface PokedexDetailProps extends RouteComponentProps<{ pokedex: string }> {
+  classes: any;
+}
 
-  const [pokedexDetail, setPokedexDetail] = useState<IPokedexDetail | null>(null);
-
-  useEffect(() => {
-    const pokedexName = pokedex || '';
-    const loadPokedexDetail = async () => {
-      const detail = await getPokedexDetail(pokedexName);
-      setPokedexDetail(detail);
-    };
-    loadPokedexDetail();
-  }, [pokedex]);
-
-  const [query, setQuery] = useState('');
-
-  const handleQueryChange = (event: React.ChangeEvent<{ value: string }>) => {
-    setQuery(event.target.value);
+class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailState> {
+  state: PokedexDetailState = {
+    name: '',
+    query: '',
+    pokemonToDisplay: []
   };
 
-  const pokemonToDisplay = pokedexDetail?.pokemon.filter(
-    (poke: IPokemonBasic) => query === '' || poke.name.includes(query)
-  );
+  allPokemon: IPokemonBasic[] = [];
 
-  const pokemonElements = pokemonToDisplay?.map((poke: IPokemonBasic) => {
+  filterPokemon = debounce((query: string) => {
+    const pokemonToDisplay = this.allPokemon.filter((poke) => query === '' || poke.name.includes(query));
+    this.setState({ pokemonToDisplay });
+  }, 200);
+
+  componentDidMount() {
+    const { pokedex } = this.props.match.params;
+    getPokedexDetail(pokedex).then((data: IPokedexDetail | null) => {
+      if (data) {
+        this.setState({
+          name: data.name,
+          pokemonToDisplay: data.pokemon
+        });
+        this.allPokemon = data.pokemon;
+      }
+    });
+  }
+
+  onQueryChange = (event: React.ChangeEvent<{ value: string }>) => {
+    const query = event.target.value;
+    this.setState({ query }, () => {
+      this.filterPokemon(query);
+    });
+  };
+
+  render() {
+    const { name, pokemonToDisplay, query } = this.state;
+    const { classes } = this.props;
+
     return (
-      <TableRow key={poke.id}>
-        <TableCell className={classes.capitalize}>{poke.name}</TableCell>
-        <TableCell>
-          <Link to={`/pokemon-details/${poke.name}`}>View Details</Link>
-        </TableCell>
-      </TableRow>
+      <React.Fragment>
+        <Typography variant="h3" className="capitalize">
+          {name}
+        </Typography>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="search-input">Search</InputLabel>
+          <Input
+            id="search-input"
+            type="text"
+            value={query}
+            onChange={this.onQueryChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <SearchIcon />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <strong>Pokémon Name</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>Details</strong>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <PokemonElements pokemonToDisplay={pokemonToDisplay} />
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </React.Fragment>
     );
-  });
+  }
+}
 
-  return (
-    <React.Fragment>
-      <Typography variant="h3" className={classes.capitalize}>
-        {pokedexDetail?.name}
-      </Typography>
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="search-input">Search</InputLabel>
-        <Input
-          id="search-input"
-          type="text"
-          value={query}
-          onChange={handleQueryChange}
-          endAdornment={
-            <InputAdornment position="end">
-              <SearchIcon />
-            </InputAdornment>
-          }
-        />
-      </FormControl>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <strong>Pokémon Name</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Details</strong>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{pokemonElements}</TableBody>
-        </Table>
-      </TableContainer>
-    </React.Fragment>
-  );
-};
-
-export default PokedexDetail;
+export default withStyles(styles)(PokedexDetail);
