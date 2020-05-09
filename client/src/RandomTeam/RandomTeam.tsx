@@ -14,9 +14,6 @@ const useStyles = makeStyles(() => ({
   select: {
     minWidth: '100%',
     textTransform: 'capitalize'
-  },
-  menuItem: {
-    textTransform: 'capitalize'
   }
 }));
 
@@ -61,7 +58,7 @@ const RandomTeam: React.FC = () => {
                 onChange={handleChange}
               >
                 {pokedexes.map((pokedex: IPokedex) => (
-                  <MenuItem value={pokedex.id} key={pokedex.id} className={classes.menuItem}>
+                  <MenuItem value={pokedex.id} key={pokedex.id} className="capitalize">
                     {pokedex.name}
                   </MenuItem>
                 ))}

@@ -8,9 +8,6 @@ import { getPokemonDetail } from '../utils/api';
 import { IPokemonDetail, IDefense, IStat } from '../utils/interfaces';
 
 const useStyles = makeStyles({
-  capitalize: {
-    textTransform: 'capitalize'
-  },
   table: {
     minWidth: 650
   },
@@ -42,7 +39,7 @@ const PokemonDetail: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3" className={classes.capitalize}>
+      <Typography variant="h3" className="capitalize">
         {pokemonDetail?.name}
       </Typography>
       <Grid container spacing={4}>
