@@ -7,7 +7,7 @@ import Home from '../Home';
 import Navbar from '../Navbar';
 import RandomTeam from '../RandomTeam';
 import PokedexDetail from '../PokedexDetail';
-import PokemonDetail from '../PokemonDetail';
+import PokemonDetailContainer from '../PokemonDetailContainer';
 import { Container, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -35,7 +35,7 @@ const App: React.FC = () => {
           <Route path="/explore" exact component={Explore} />
           <Route path="/random-team" exact component={RandomTeam} />
           <Route path="/pokedex-details/:pokedex" exact component={PokedexDetail} />
-          <Route path="/pokemon-details/:pokemon" exact component={PokemonDetail} />
+          <Route path="/pokemon-details/:pokemon" exact component={PokemonDetailContainer} />
         </Switch>
       </Container>
       <Footer />

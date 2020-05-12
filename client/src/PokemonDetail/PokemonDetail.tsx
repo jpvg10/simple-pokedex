@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import { Typography, makeStyles, Grid } from '@material-ui/core';
 import StatProgressBar from './StatProgressBar';
 import Defense from './Defense';
 import TypeLabel from './TypeLabel';
-import { getPokemonDetail } from '../utils/api';
-import { IPokemonDetail, IDefense, IStat } from '../utils/interfaces';
+import { IDefense, IStat, IPokemonDetail } from '../utils/interfaces';
 
 const useStyles = makeStyles({
   table: {
@@ -21,21 +19,12 @@ const useStyles = makeStyles({
   }
 });
 
-const PokemonDetail: React.FC = () => {
+type Props = {
+  pokemonDetail: IPokemonDetail | null;
+};
+
+const PokemonDetail = ({ pokemonDetail }: Props) => {
   const classes = useStyles();
-
-  const { pokemon } = useParams();
-
-  const [pokemonDetail, setPokemonDetail] = useState<IPokemonDetail | null>(null);
-
-  useEffect(() => {
-    const pokemonName = pokemon || '';
-    const loadPokemonDetail = async () => {
-      const detail = await getPokemonDetail(pokemonName);
-      setPokemonDetail(detail);
-    };
-    loadPokemonDetail();
-  }, [pokemon]);
 
   return (
     <React.Fragment>
