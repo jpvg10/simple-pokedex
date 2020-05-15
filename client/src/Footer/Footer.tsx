@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, AppBar, Container, Typography, Link } from '@material-ui/core';
+import { makeStyles, AppBar, Container, Link } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   footer: {
@@ -24,16 +24,16 @@ const Footer: React.FC = () => {
       <Container maxWidth="md">
         <div className={classes.flexContainer}>
           <div>
-            <Typography paragraph>
+            <p>
               {`Powered by the `}
               <Link color="inherit" target="_blank" rel="noopener noreferrer" href="https://pokeapi.co/">
                 Pokéapi
               </Link>
-            </Typography>
-            <Typography paragraph>Juan Pablo Valencia, {year}</Typography>
+            </p>
+            <p>Juan Pablo Valencia, {year}</p>
           </div>
           <div>
-            <Typography paragraph>Find this on GitHub</Typography>
+            <p>Find this on GitHub</p>
           </div>
         </div>
       </Container>

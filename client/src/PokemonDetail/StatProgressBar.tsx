@@ -1,6 +1,6 @@
 import React from 'react';
 import { IStat } from '../utils/interfaces';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   p: {
@@ -35,12 +35,10 @@ const StatProgressBar: React.FC<IStat> = ({ name, baseStat }) => {
   const classes = useStyles({ baseStat });
   return (
     <React.Fragment>
-      <Typography paragraph className={classes.p}>
-        {name}
-      </Typography>
+      <p className={classes.p}>{name}</p>
       <div className={classes.container}>
         <div className={classes.filler}>
-          <Typography paragraph>{baseStat}</Typography>
+          <p>{baseStat}</p>
         </div>
       </div>
     </React.Fragment>

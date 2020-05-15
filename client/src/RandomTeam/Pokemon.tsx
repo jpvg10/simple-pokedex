@@ -19,9 +19,7 @@ const Pokemon: React.FC<IPokemonPicture> = ({ name, pictureUrl }) => {
       </Typography>
       <img src={pictureUrl} alt="Pokémon" />
       <Link to={`/pokemon-details/${name}`} target="_blank">
-        <Typography paragraph className={classes.name}>
-          View details
-        </Typography>
+        <p className={classes.name}>View details</p>
       </Link>
     </React.Fragment>
   );

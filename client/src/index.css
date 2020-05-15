@@ -13,3 +13,9 @@ h5 {
 .capitalize {
     text-transform: capitalize;
 }
+
+p {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    margin-top: 0;
+    line-height: 1.5;
+}

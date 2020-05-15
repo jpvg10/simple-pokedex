@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import TypeLabel from './TypeLabel';
 import { IDefense } from '../utils/interfaces';
 
@@ -19,7 +19,7 @@ const Defense: React.FC<IDefense> = ({ type, value }) => {
   return (
     <div className={classes.div}>
       <TypeLabel type={type} />
-      <Typography paragraph>x {value}</Typography>
+      <p>x {value}</p>
     </div>
   );
 };
