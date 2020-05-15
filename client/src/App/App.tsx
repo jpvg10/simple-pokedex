@@ -9,6 +9,7 @@ import RandomTeam from '../RandomTeam';
 import PokedexDetail from '../PokedexDetail';
 import PokemonDetailContainer from '../PokemonDetailContainer';
 import { Container, makeStyles } from '@material-ui/core';
+import Error404 from '../Error404';
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           <Route path="/random-team" exact component={RandomTeam} />
           <Route path="/pokedex-details/:pokedex" exact component={PokedexDetail} />
           <Route path="/pokemon-details/:pokemon" exact component={PokemonDetailContainer} />
+          <Route component={Error404} />
         </Switch>
       </Container>
       <Footer />

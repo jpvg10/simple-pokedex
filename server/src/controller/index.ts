@@ -12,7 +12,7 @@ export const getPokedexes: RequestHandler = async (req, res) => {
     });
     res.status(200).send(arrayPokedex);
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send();
   }
 };
 
@@ -36,6 +36,9 @@ export const getPokedexDetail: RequestHandler = async (req, res) => {
 
     res.status(200).send(pokedexData);
   } catch (e) {
+    if (e && e.response && e.response.status === 404) {
+      return res.status(404).send();
+    }
     res.status(500).send(e);
   }
 };
@@ -111,7 +114,10 @@ export const getPokemon: RequestHandler = async (req, res) => {
 
     res.status(200).send(pokemonData);
   } catch (e) {
-    res.status(500).send(e);
+    if (e && e.response && e.response.status === 404) {
+      return res.status(404).send();
+    }
+    res.status(500).send();
   }
 };
 
@@ -139,6 +145,9 @@ export const getRandomTeam: RequestHandler = async (req, res) => {
 
     res.status(200).send(arrayPokemon);
   } catch (e) {
-    res.status(500).send(e);
+    if (e && e.response && e.response.status === 404) {
+      return res.status(404).send();
+    }
+    res.status(500).send();
   }
 };
