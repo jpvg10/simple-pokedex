@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
 import ErrorUnknown from '../ErrorUnknown';
+import Spinner from '../Spinner';
 import { getPoxedexes } from '../utils/api';
 import { IPokedex } from '../utils/interfaces';
 import { ERequestStatus } from '../utils/enums';
@@ -38,6 +39,10 @@ const Explore: React.FC = () => {
     };
     loadPokedex();
   }, []);
+
+  if (requestStatus === ERequestStatus.LOADING) {
+    return <Spinner />;
+  }
 
   if (requestStatus === ERequestStatus.FAILED) {
     return <ErrorUnknown />;

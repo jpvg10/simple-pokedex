@@ -3,6 +3,7 @@ import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem
 import badges from './badges.png';
 import Pokemon from './Pokemon';
 import ErrorUnknown from '../ErrorUnknown';
+import Spinner from '../Spinner';
 import { getPoxedexes, getRandomTeam } from '../utils/api';
 import { IPokedex, IPokemonPicture } from '../utils/interfaces';
 import { ERequestStatus } from '../utils/enums';
@@ -58,6 +59,10 @@ const RandomTeam: React.FC = () => {
       setPokemonRequestStatus(ERequestStatus.FAILED);
     }
   };
+
+  if (pokedexRequestStatus === ERequestStatus.LOADING) {
+    return <Spinner />;
+  }
 
   if (pokedexRequestStatus === ERequestStatus.FAILED || pokemonRequestStatus === ERequestStatus.FAILED) {
     return <ErrorUnknown />;

@@ -5,6 +5,7 @@ import { getPokedexDetail, getPokemonDetail } from '../utils/api';
 import { IPokemonBasic, IPokemonDetail } from '../utils/interfaces';
 import PokemonDetail from '../PokemonDetail';
 import ErrorUnknown from '../ErrorUnknown';
+import Spinner from '../Spinner';
 import { ERequestStatus } from '../utils/enums';
 
 const useStyles = makeStyles(() => ({
@@ -69,6 +70,10 @@ const Compare: React.FC = () => {
     setPokemonData(state);
     lastCalledRef.current = [selected[0].value, selected[1].value];
   };
+
+  if (requestStatus === ERequestStatus.LOADING) {
+    return <Spinner />;
+  }
 
   if (requestStatus === ERequestStatus.FAILED) {
     return <ErrorUnknown />;
