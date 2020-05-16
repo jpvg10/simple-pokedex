@@ -26,7 +26,6 @@ const RandomTeam: React.FC = () => {
   const [pokedexes, setPokedexes] = useState<IPokedex[]>([]);
   const [selectedPokedex, setSelectedPokedex] = useState('');
   const [pokedexRequestStatus, setPokedexRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
-  const [pokemonRequestStatus, setPokemonRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
 
   useEffect(() => {
     const loadPokedex = async () => {
@@ -48,15 +47,17 @@ const RandomTeam: React.FC = () => {
   };
 
   const [team, setTeam] = useState<IPokemonPicture[]>([]);
+  const [teamRequestStatus, setTeamRequestStatus] = useState<ERequestStatus>(ERequestStatus.NOT_LOADED);
 
   const onClickGo = async () => {
     try {
+      setTeamRequestStatus(ERequestStatus.LOADING);
       const randomTeam = await getRandomTeam(selectedPokedex);
       setTeam(randomTeam);
-      setPokemonRequestStatus(ERequestStatus.LOADED);
+      setTeamRequestStatus(ERequestStatus.LOADED);
     } catch (e) {
       console.log(e);
-      setPokemonRequestStatus(ERequestStatus.FAILED);
+      setTeamRequestStatus(ERequestStatus.FAILED);
     }
   };
 
@@ -64,7 +65,7 @@ const RandomTeam: React.FC = () => {
     return <Spinner />;
   }
 
-  if (pokedexRequestStatus === ERequestStatus.FAILED || pokemonRequestStatus === ERequestStatus.FAILED) {
+  if (pokedexRequestStatus === ERequestStatus.FAILED) {
     return <ErrorUnknown />;
   }
 
@@ -100,13 +101,17 @@ const RandomTeam: React.FC = () => {
           <img src={badges} alt="Pokéball" className={classes.image} />
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
-        {team.map((poke: IPokemonPicture) => (
-          <Grid item key={poke.name}>
-            <Pokemon {...poke} />
-          </Grid>
-        ))}
-      </Grid>
+      {teamRequestStatus === ERequestStatus.LOADING && <Spinner />}
+      {teamRequestStatus === ERequestStatus.FAILED && <ErrorUnknown />}
+      {teamRequestStatus === ERequestStatus.LOADED && (
+        <Grid container spacing={2}>
+          {team.map((poke: IPokemonPicture) => (
+            <Grid item key={poke.name}>
+              <Pokemon {...poke} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
       <Typography variant="h5">Can you beat the Elite Four with this team?</Typography>
     </React.Fragment>
   );

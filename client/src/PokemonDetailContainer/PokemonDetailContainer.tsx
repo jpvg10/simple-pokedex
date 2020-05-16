@@ -5,6 +5,7 @@ import ErrorUnknown from '../ErrorUnknown';
 import { getPokemonDetail } from '../utils/api';
 import { IPokemonDetail } from '../utils/interfaces';
 import { ERequestStatus } from '../utils/enums';
+import Spinner from '../Spinner';
 
 const PokemonDetailContainer: React.FC = () => {
   const { pokemon } = useParams();
@@ -31,6 +32,10 @@ const PokemonDetailContainer: React.FC = () => {
     };
     loadPokemonDetail();
   }, [pokemon, history]);
+
+  if (requestStatus === ERequestStatus.LOADING) {
+    return <Spinner />;
+  }
 
   if (requestStatus === ERequestStatus.FAILED) {
     return <ErrorUnknown />;

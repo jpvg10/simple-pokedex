@@ -22,6 +22,7 @@ import ErrorUnknown from '../ErrorUnknown';
 import { getPokedexDetail } from '../utils/api';
 import { IPokemonBasic, IPokedexDetail } from '../utils/interfaces';
 import { ERequestStatus } from '../utils/enums';
+import Spinner from '../Spinner';
 
 const styles = () => ({
   table: {
@@ -90,6 +91,10 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
   render() {
     const { name, pokemonToDisplay, query, requestStatus } = this.state;
     const { classes } = this.props;
+
+    if (requestStatus === ERequestStatus.LOADING) {
+      return <Spinner />;
+    }
 
     if (requestStatus === ERequestStatus.FAILED) {
       return <ErrorUnknown />;

@@ -24,7 +24,7 @@ const Compare: React.FC = () => {
   const classes = useStyles();
 
   const [pokemonList, setPokemonList] = useState<ISelectOptions[]>([]);
-  const [requestStatus, setRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
+  const [listRequestStatus, setListRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
 
   useEffect(() => {
     const loadPokemonList = async () => {
@@ -36,10 +36,10 @@ const Compare: React.FC = () => {
         }));
         setPokemonList(list);
         setSelected([list[0], list[0]]);
-        setRequestStatus(ERequestStatus.LOADED);
+        setListRequestStatus(ERequestStatus.LOADED);
       } catch (e) {
         console.log(e);
-        setRequestStatus(ERequestStatus.FAILED);
+        setListRequestStatus(ERequestStatus.FAILED);
       }
     };
     loadPokemonList();
@@ -55,27 +55,32 @@ const Compare: React.FC = () => {
 
   const [pokemonData, setPokemonData] = useState<IPokemonDetail[]>([]);
   const lastCalledRef = useRef<string[]>(['', '']);
+  const [pokemonRequestStatus, setPokemonRequestStatus] = useState<ERequestStatus>(ERequestStatus.NOT_LOADED);
 
   const onClickGo = async () => {
-    console.log(selected);
-    const state = [...pokemonData];
-    if (lastCalledRef.current[0] !== selected[0].value) {
-      const data = await getPokemonDetail(selected[0].label);
-      if (data) state[0] = data;
+    try {
+      setPokemonRequestStatus(ERequestStatus.LOADING);
+      const state = [...pokemonData];
+      if (lastCalledRef.current[0] !== selected[0].value) {
+        state[0] = await getPokemonDetail(selected[0].label);
+      }
+      if (lastCalledRef.current[1] !== selected[1].value) {
+        state[1] = await getPokemonDetail(selected[1].label);
+      }
+      setPokemonData(state);
+      setPokemonRequestStatus(ERequestStatus.LOADED);
+      lastCalledRef.current = [selected[0].value, selected[1].value];
+    } catch (e) {
+      console.log(e);
+      setPokemonRequestStatus(ERequestStatus.FAILED);
     }
-    if (lastCalledRef.current[1] !== selected[1].value) {
-      const data = await getPokemonDetail(selected[1].label);
-      if (data) state[1] = data;
-    }
-    setPokemonData(state);
-    lastCalledRef.current = [selected[0].value, selected[1].value];
   };
 
-  if (requestStatus === ERequestStatus.LOADING) {
+  if (listRequestStatus === ERequestStatus.LOADING) {
     return <Spinner />;
   }
 
-  if (requestStatus === ERequestStatus.FAILED) {
+  if (listRequestStatus === ERequestStatus.FAILED) {
     return <ErrorUnknown />;
   }
 
@@ -95,7 +100,9 @@ const Compare: React.FC = () => {
           </Button>
         </Grid>
       </Grid>
-      {pokemonData.length !== 0 && (
+      {pokemonRequestStatus === ERequestStatus.LOADING && <Spinner />}
+      {pokemonRequestStatus === ERequestStatus.FAILED && <ErrorUnknown />}
+      {pokemonRequestStatus === ERequestStatus.LOADED && (
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <PokemonDetail pokemonDetail={pokemonData[0]} />
