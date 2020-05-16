@@ -57,15 +57,23 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
 
   componentDidMount() {
     const { pokedex } = this.props.match.params;
-    getPokedexDetail(pokedex).then((data: IPokedexDetail | null) => {
-      if (data) {
-        this.setState({
-          name: data.name,
-          pokemonToDisplay: data.pokemon
-        });
-        this.allPokemon = data.pokemon;
-      }
-    });
+    getPokedexDetail(pokedex)
+      .then((data: IPokedexDetail) => {
+        if (data) {
+          this.setState({
+            name: data.name,
+            pokemonToDisplay: data.pokemon
+          });
+          this.allPokemon = data.pokemon;
+        }
+      })
+      .catch((e) => {
+        if (e && e.response && e.response.status === 404) {
+          this.props.history.replace('/404');
+        } else {
+          console.log(e);
+        }
+      });
   }
 
   onQueryChange = (event: React.ChangeEvent<{ value: string }>) => {
