@@ -4,6 +4,8 @@ import { Typography, makeStyles, Grid, Button } from '@material-ui/core';
 import { getPokedexDetail, getPokemonDetail } from '../utils/api';
 import { IPokemonBasic, IPokemonDetail } from '../utils/interfaces';
 import PokemonDetail from '../PokemonDetail';
+import ErrorUnknown from '../ErrorUnknown';
+import { ERequestStatus } from '../utils/enums';
 
 const useStyles = makeStyles(() => ({
   select: {
@@ -21,17 +23,22 @@ const Compare: React.FC = () => {
   const classes = useStyles();
 
   const [pokemonList, setPokemonList] = useState<ISelectOptions[]>([]);
+  const [requestStatus, setRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
 
   useEffect(() => {
     const loadPokemonList = async () => {
-      const detail = await getPokedexDetail('national');
-      if (detail) {
+      try {
+        const detail = await getPokedexDetail('national');
         const list: ISelectOptions[] = detail.pokemon.map((poke: IPokemonBasic) => ({
           value: poke.id,
           label: poke.name
         }));
         setPokemonList(list);
         setSelected([list[0], list[0]]);
+        setRequestStatus(ERequestStatus.LOADED);
+      } catch (e) {
+        console.log(e);
+        setRequestStatus(ERequestStatus.FAILED);
       }
     };
     loadPokemonList();
@@ -62,6 +69,10 @@ const Compare: React.FC = () => {
     setPokemonData(state);
     lastCalledRef.current = [selected[0].value, selected[1].value];
   };
+
+  if (requestStatus === ERequestStatus.FAILED) {
+    return <ErrorUnknown />;
+  }
 
   return (
     <React.Fragment>

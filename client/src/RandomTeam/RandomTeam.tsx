@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
 import Pokemon from './Pokemon';
+import ErrorUnknown from '../ErrorUnknown';
 import { getPoxedexes, getRandomTeam } from '../utils/api';
 import { IPokedex, IPokemonPicture } from '../utils/interfaces';
+import { ERequestStatus } from '../utils/enums';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -22,12 +24,20 @@ const RandomTeam: React.FC = () => {
 
   const [pokedexes, setPokedexes] = useState<IPokedex[]>([]);
   const [selectedPokedex, setSelectedPokedex] = useState('');
+  const [pokedexRequestStatus, setPokedexRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
+  const [pokemonRequestStatus, setPokemonRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
 
   useEffect(() => {
     const loadPokedex = async () => {
-      const result = await getPoxedexes();
-      setPokedexes(result);
-      setSelectedPokedex(result[0].id);
+      try {
+        const result = await getPoxedexes();
+        setPokedexes(result);
+        setSelectedPokedex(result[0].id);
+        setPokedexRequestStatus(ERequestStatus.LOADED);
+      } catch (e) {
+        console.log(e);
+        setPokedexRequestStatus(ERequestStatus.FAILED);
+      }
     };
     loadPokedex();
   }, []);
@@ -39,9 +49,19 @@ const RandomTeam: React.FC = () => {
   const [team, setTeam] = useState<IPokemonPicture[]>([]);
 
   const onClickGo = async () => {
-    const randomTeam = await getRandomTeam(selectedPokedex);
-    setTeam(randomTeam);
+    try {
+      const randomTeam = await getRandomTeam(selectedPokedex);
+      setTeam(randomTeam);
+      setPokemonRequestStatus(ERequestStatus.LOADED);
+    } catch (e) {
+      console.log(e);
+      setPokemonRequestStatus(ERequestStatus.FAILED);
+    }
   };
+
+  if (pokedexRequestStatus === ERequestStatus.FAILED || pokemonRequestStatus === ERequestStatus.FAILED) {
+    return <ErrorUnknown />;
+  }
 
   return (
     <React.Fragment>

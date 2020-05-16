@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
+import ErrorUnknown from '../ErrorUnknown';
 import { getPoxedexes } from '../utils/api';
 import { IPokedex } from '../utils/interfaces';
+import { ERequestStatus } from '../utils/enums';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -21,14 +23,25 @@ const Explore: React.FC = () => {
   const classes = useStyles();
 
   const [pokedexes, setPokedexes] = useState<IPokedex[]>([]);
+  const [requestStatus, setRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
 
   useEffect(() => {
     const loadPokedex = async () => {
-      const result = await getPoxedexes();
-      setPokedexes(result);
+      try {
+        const result = await getPoxedexes();
+        setPokedexes(result);
+        setRequestStatus(ERequestStatus.LOADED);
+      } catch (e) {
+        console.log(e);
+        setRequestStatus(ERequestStatus.FAILED);
+      }
     };
     loadPokedex();
   }, []);
+
+  if (requestStatus === ERequestStatus.FAILED) {
+    return <ErrorUnknown />;
+  }
 
   return (
     <React.Fragment>

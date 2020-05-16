@@ -18,8 +18,10 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import debounce from 'lodash.debounce';
 import PokemonElements from './PokemonElements';
+import ErrorUnknown from '../ErrorUnknown';
 import { getPokedexDetail } from '../utils/api';
 import { IPokemonBasic, IPokedexDetail } from '../utils/interfaces';
+import { ERequestStatus } from '../utils/enums';
 
 const styles = () => ({
   table: {
@@ -35,6 +37,7 @@ interface PokedexDetailState {
   name: string;
   query: string;
   pokemonToDisplay: IPokemonBasic[];
+  requestStatus: ERequestStatus;
 }
 
 interface PokedexDetailProps extends RouteComponentProps<{ pokedex: string }> {
@@ -45,7 +48,8 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
   state: PokedexDetailState = {
     name: '',
     query: '',
-    pokemonToDisplay: []
+    pokemonToDisplay: [],
+    requestStatus: ERequestStatus.LOADING
   };
 
   allPokemon: IPokemonBasic[] = [];
@@ -59,19 +63,19 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
     const { pokedex } = this.props.match.params;
     getPokedexDetail(pokedex)
       .then((data: IPokedexDetail) => {
-        if (data) {
-          this.setState({
-            name: data.name,
-            pokemonToDisplay: data.pokemon
-          });
-          this.allPokemon = data.pokemon;
-        }
+        this.setState({
+          name: data.name,
+          pokemonToDisplay: data.pokemon,
+          requestStatus: ERequestStatus.LOADED
+        });
+        this.allPokemon = data.pokemon;
       })
       .catch((e) => {
         if (e && e.response && e.response.status === 404) {
           this.props.history.replace('/404');
         } else {
           console.log(e);
+          this.setState({ requestStatus: ERequestStatus.FAILED });
         }
       });
   }
@@ -84,8 +88,12 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
   };
 
   render() {
-    const { name, pokemonToDisplay, query } = this.state;
+    const { name, pokemonToDisplay, query, requestStatus } = this.state;
     const { classes } = this.props;
+
+    if (requestStatus === ERequestStatus.FAILED) {
+      return <ErrorUnknown />;
+    }
 
     return (
       <React.Fragment>

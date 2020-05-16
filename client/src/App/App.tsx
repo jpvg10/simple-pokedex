@@ -19,7 +19,8 @@ const useStyles = makeStyles(() => ({
   },
   container: {
     flex: '1 0 auto',
-    paddingTop: '68px'
+    marginTop: '68px',
+    paddingTop: '24px'
   }
 }));
 
