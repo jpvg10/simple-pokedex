@@ -4,3 +4,8 @@ export enum ERequestStatus {
   LOADED = 'LOADED',
   FAILED = 'FAILED'
 }
+
+export enum ESpinnerSize {
+  SM = 'SM',
+  LG = 'LG'
+}

@@ -18,10 +18,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import debounce from 'lodash.debounce';
 import PokemonElements from './PokemonElements';
 import ErrorUnknown from '../ErrorUnknown';
+import Spinner from '../Spinner';
 import { getPokedexDetail } from '../utils/api';
 import { IPokemonBasic, IPokedexDetail } from '../utils/interfaces';
-import { ERequestStatus } from '../utils/enums';
-import Spinner from '../Spinner';
+import { ERequestStatus, ESpinnerSize } from '../utils/enums';
 
 const styles = () => ({
   table: {
@@ -38,6 +38,7 @@ interface PokedexDetailState {
   query: string;
   pokemonToDisplay: IPokemonBasic[];
   requestStatus: ERequestStatus;
+  isSearching: boolean;
 }
 
 interface PokedexDetailProps extends RouteComponentProps<{ pokedex: string }> {
@@ -49,14 +50,15 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
     name: '',
     query: '',
     pokemonToDisplay: [],
-    requestStatus: ERequestStatus.LOADING
+    requestStatus: ERequestStatus.LOADING,
+    isSearching: false
   };
 
   allPokemon: IPokemonBasic[] = [];
 
   filterPokemon = debounce((query: string) => {
     const pokemonToDisplay = this.allPokemon.filter((poke) => query === '' || poke.name.includes(query));
-    this.setState({ pokemonToDisplay });
+    this.setState({ pokemonToDisplay, isSearching: false });
   }, 200);
 
   componentDidMount() {
@@ -82,13 +84,13 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
 
   onQueryChange = (event: React.ChangeEvent<{ value: string }>) => {
     const query = event.target.value;
-    this.setState({ query }, () => {
+    this.setState({ query, isSearching: true }, () => {
       this.filterPokemon(query);
     });
   };
 
   render() {
-    const { name, pokemonToDisplay, query, requestStatus } = this.state;
+    const { name, pokemonToDisplay, query, requestStatus, isSearching } = this.state;
     const { classes } = this.props;
 
     if (requestStatus === ERequestStatus.LOADING) {
@@ -109,6 +111,11 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
             type="text"
             value={query}
             onChange={this.onQueryChange}
+            startAdornment={
+              <InputAdornment position="start">
+                <Spinner show={isSearching} size={ESpinnerSize.SM} />
+              </InputAdornment>
+            }
             endAdornment={
               <InputAdornment position="end">
                 <SearchIcon />

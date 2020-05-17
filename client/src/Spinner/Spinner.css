@@ -7,16 +7,11 @@
     }
 }
 
-.spinner-container {
-    text-align: center;
-}
-
 .spin {
     display: inline-block;
-    height: 60px;
-    width: 60px;
     border-radius: 50%;
-    border: solid 5px #cfd0d1;
+    border-style: solid;
+    border-color: #cfd0d1;
     border-bottom-color: #3f51b5;
     animation: 1.5s linear infinite spinner;
 }
