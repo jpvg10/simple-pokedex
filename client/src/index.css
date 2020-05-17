@@ -2,12 +2,30 @@ body {
     margin: 0;
 }
 
+h3, h4, h5, h6 {
+    margin-top: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+}
+
 h3 {
-    margin-bottom: 1.168rem !important;
+    margin-bottom: 1.168rem;
+    font-size: 3rem;
+}
+
+h4 {
+    margin-bottom: 0.912rem;
+    font-size: 2.125rem;
 }
 
 h5 {
-    margin-bottom: 0.656rem !important;
+    margin-bottom: 0.656rem;
+    font-size: 1.5rem;
+}
+
+h6 {
+    margin-bottom: 0.4rem;
+    font-size: 1.25rem;
 }
 
 .capitalize {

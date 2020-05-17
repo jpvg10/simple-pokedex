@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Select from 'react-select';
-import { Typography, makeStyles, Grid, Button } from '@material-ui/core';
+import { makeStyles, Grid, Button } from '@material-ui/core';
 import { getPokedexDetail, getPokemonDetail } from '../utils/api';
 import { IPokemonBasic, IPokemonDetail } from '../utils/interfaces';
 import PokemonDetail from '../PokemonDetail';
@@ -86,7 +86,7 @@ const Compare: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3">Compare Pokémon</Typography>
+      <h3>Compare Pokémon</h3>
       <Grid container spacing={2}>
         <Grid item xs={12} md={5}>
           <Select options={pokemonList} value={selected[0]} onChange={handler(0)} className={classes.select} />

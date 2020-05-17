@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import pokeball from './pokeball.png';
 
 const useStyles = makeStyles(() => ({
@@ -15,7 +15,7 @@ const Home: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3">Welcome to the Simple Pokédex</Typography>
+      <h3>Welcome to the Simple Pokédex</h3>
       <img src={pokeball} alt="Pokéball" className={classes.image} />
     </React.Fragment>
   );

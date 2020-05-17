@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
+import { Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
 import ErrorUnknown from '../ErrorUnknown';
 import Spinner from '../Spinner';
@@ -50,7 +50,7 @@ const Explore: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3">Pokédex</Typography>
+      <h3>Pokédex</h3>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Card>

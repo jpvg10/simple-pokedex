@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, makeStyles, Grid } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 import StatProgressBar from './StatProgressBar';
 import Defense from './Defense';
 import TypeLabel from './TypeLabel';
@@ -28,9 +28,7 @@ const PokemonDetail = ({ pokemonDetail }: Props) => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3" className="capitalize">
-        {pokemonDetail?.name}
-      </Typography>
+      <h3 className="capitalize">{pokemonDetail?.name}</h3>
       <Grid container spacing={4}>
         <Grid item>
           <img src={pokemonDetail?.frontPictureUrl} alt="Pokemon front" />
@@ -42,17 +40,17 @@ const PokemonDetail = ({ pokemonDetail }: Props) => {
           ))}
         </Grid>
       </Grid>
-      <Typography variant="h5">National #{pokemonDetail?.number}</Typography>
+      <h5>National #{pokemonDetail?.number}</h5>
       <Grid container spacing={4}>
         <Grid item xs={12} sm="auto" md={6}>
-          <Typography variant="h4">Base stats</Typography>
+          <h4>Base stats</h4>
           {pokemonDetail?.stats.map((stat: IStat) => (
             <StatProgressBar key={stat.name} {...stat} />
           ))}
         </Grid>
         <Grid item xs={12} sm="auto" md={6}>
-          <Typography variant="h4">Defenses</Typography>
-          <Typography paragraph>The effect that different types of attack have on this Pokémon</Typography>
+          <h4>Defenses</h4>
+          <p>The effect that different types of attack have on this Pokémon</p>
           {pokemonDetail?.defenses.map((def: IDefense) => (
             <Defense key={def.type} {...def} />
           ))}

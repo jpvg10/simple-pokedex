@@ -1,7 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import {
-  Typography,
   TableContainer,
   Paper,
   Table,
@@ -102,9 +101,7 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
 
     return (
       <React.Fragment>
-        <Typography variant="h3" className="capitalize">
-          {name}
-        </Typography>
+        <h3 className="capitalize">{name}</h3>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="search-input">Search</InputLabel>
           <Input

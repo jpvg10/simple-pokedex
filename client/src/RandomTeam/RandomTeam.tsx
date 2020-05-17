@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
+import { Grid, makeStyles, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import badges from './badges.png';
 import Pokemon from './Pokemon';
 import ErrorUnknown from '../ErrorUnknown';
@@ -71,7 +71,7 @@ const RandomTeam: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3">Get a random Pokémon Team</Typography>
+      <h3>Get a random Pokémon Team</h3>
       <Grid container spacing={2}>
         <Grid container spacing={2} item xs={12} md={8}>
           <Grid item xs={10}>
@@ -112,7 +112,7 @@ const RandomTeam: React.FC = () => {
           ))}
         </Grid>
       )}
-      <Typography variant="h5">Can you beat the Elite Four with this team?</Typography>
+      <h5>Can you beat the Elite Four with this team?</h5>
     </React.Fragment>
   );
 };
