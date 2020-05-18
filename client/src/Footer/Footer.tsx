@@ -39,7 +39,17 @@ const Footer: React.FC = () => {
             <p>Juan Pablo Valencia, {year}</p>
           </div>
           <div>
-            <p>Find this on GitHub</p>
+            <p>
+              <Link
+                color="inherit"
+                underline="always"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/jpvg10/simple-pokedex"
+              >
+                Find this on GitHub
+              </Link>
+            </p>
           </div>
         </div>
       </Container>

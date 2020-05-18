@@ -12,11 +12,14 @@ const useStyles = makeStyles(() => ({
   image: {
     width: '100%',
     height: 'auto',
-    maxWidth: '400px'
+    maxWidth: '200px'
   },
   select: {
     minWidth: '100%',
     textTransform: 'capitalize'
+  },
+  mb: {
+    marginBottom: '20px'
   }
 }));
 
@@ -72,8 +75,8 @@ const RandomTeam: React.FC = () => {
   return (
     <React.Fragment>
       <h3>Get a random Pokémon Team</h3>
-      <Grid container spacing={2}>
-        <Grid container spacing={2} item xs={12} md={8}>
+      <Grid container spacing={2} className={classes.mb}>
+        <Grid container spacing={2} item xs={12} sm={8}>
           <Grid item xs={10}>
             <FormControl className={classes.select}>
               <InputLabel id="pokedex-select-label">Pick a Pokédex</InputLabel>
@@ -97,8 +100,8 @@ const RandomTeam: React.FC = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <img src={badges} alt="Pokéball" className={classes.image} />
+        <Grid item xs={12} sm={4}>
+          <img src={badges} alt="Gym badges" className={classes.image} />
         </Grid>
       </Grid>
       {teamRequestStatus === ERequestStatus.LOADING && <Spinner />}

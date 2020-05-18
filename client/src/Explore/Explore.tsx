@@ -56,7 +56,7 @@ const Explore: React.FC = () => {
     <React.Fragment>
       <h3>Pokédex</h3>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6}>
           <Card>
             <CardContent className={classes.card}>
               <List component="nav" aria-label="main mailbox folders">
@@ -71,7 +71,7 @@ const Explore: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6}>
           <img src={pokedex} alt="Pokéball" className={classes.image} />
         </Grid>
       </Grid>

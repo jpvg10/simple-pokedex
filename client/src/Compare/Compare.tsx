@@ -88,10 +88,10 @@ const Compare: React.FC = () => {
     <React.Fragment>
       <h3>Compare Pokémon</h3>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} sm={5}>
           <Select options={pokemonList} value={selected[0]} onChange={handler(0)} className={classes.select} />
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} sm={5}>
           <Select options={pokemonList} value={selected[1]} onChange={handler(1)} className={classes.select} />
         </Grid>
         <Grid item xs={2}>
