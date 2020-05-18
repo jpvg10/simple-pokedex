@@ -33,7 +33,7 @@ const styles = () => ({
   }
 });
 
-interface PokedexDetailState {
+interface IPokedexDetailState {
   name: string;
   query: string;
   pokemonToDisplay: IPokemonBasic[];
@@ -41,12 +41,12 @@ interface PokedexDetailState {
   isSearching: boolean;
 }
 
-interface PokedexDetailProps extends RouteComponentProps<{ pokedex: string }> {
+interface IPokedexDetailProps extends RouteComponentProps<{ pokedex: string }> {
   classes: any;
 }
 
-class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailState> {
-  state: PokedexDetailState = {
+class PokedexDetail extends React.Component<IPokedexDetailProps, IPokedexDetailState> {
+  state: IPokedexDetailState = {
     name: '',
     query: '',
     pokemonToDisplay: [],
@@ -109,6 +109,7 @@ class PokedexDetail extends React.Component<PokedexDetailProps, PokedexDetailSta
           <Input
             id="search-input"
             type="text"
+            autoComplete="off"
             value={query}
             onChange={this.onQueryChange}
             startAdornment={

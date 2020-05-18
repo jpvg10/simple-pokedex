@@ -1,17 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TableRow, TableCell } from '@material-ui/core';
+import { TableRow, TableCell, withStyles } from '@material-ui/core';
 import { IPokemonBasic } from '../utils/interfaces';
 
-class PokemonElements extends React.PureComponent<{ pokemonToDisplay: IPokemonBasic[] }, {}> {
+const styles = () => ({
+  link: {
+    color: '#0000EE',
+    '&:visited': {
+      color: '#0000EE'
+    }
+  }
+});
+
+interface IPokemonElementsProps {
+  pokemonToDisplay: IPokemonBasic[];
+  classes: any;
+}
+
+class PokemonElements extends React.PureComponent<IPokemonElementsProps, {}> {
   render() {
-    const { pokemonToDisplay } = this.props;
+    const { pokemonToDisplay, classes } = this.props;
     const elements = pokemonToDisplay.map((poke: IPokemonBasic) => {
       return (
         <TableRow key={poke.id}>
           <TableCell className="capitalize">{poke.name}</TableCell>
           <TableCell>
-            <Link to={`/pokemon-details/${poke.name}`}>View Details</Link>
+            <Link to={`/pokemon-details/${poke.name}`} className={classes.link}>
+              View Details
+            </Link>
           </TableCell>
         </TableRow>
       );
@@ -20,4 +36,4 @@ class PokemonElements extends React.PureComponent<{ pokemonToDisplay: IPokemonBa
   }
 }
 
-export default PokemonElements;
+export default withStyles(styles)(PokemonElements);

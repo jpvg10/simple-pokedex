@@ -17,6 +17,10 @@ const useStyles = makeStyles(() => ({
   card: {
     paddingBottom: '16px !important',
     textTransform: 'capitalize'
+  },
+  link: {
+    color: 'inherit',
+    textDecoration: 'none'
   }
 }));
 
@@ -57,7 +61,7 @@ const Explore: React.FC = () => {
             <CardContent className={classes.card}>
               <List component="nav" aria-label="main mailbox folders">
                 {pokedexes.map((pokedex: IPokedex) => (
-                  <Link to={`/pokedex-details/${pokedex.id}`} key={pokedex.id}>
+                  <Link to={`/pokedex-details/${pokedex.id}`} key={pokedex.id} className={classes.link}>
                     <ListItem button>
                       <ListItemText primary={pokedex.name} />
                     </ListItem>

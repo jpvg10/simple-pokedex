@@ -26,7 +26,13 @@ const Footer: React.FC = () => {
           <div>
             <p>
               {`Powered by the `}
-              <Link color="inherit" target="_blank" rel="noopener noreferrer" href="https://pokeapi.co/">
+              <Link
+                color="inherit"
+                underline="always"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://pokeapi.co/"
+              >
                 Pokéapi
               </Link>
             </p>
