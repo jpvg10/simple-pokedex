@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, Grid } from '@material-ui/core';
+import { makeStyles, Grid, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StatProgressBar from './StatProgressBar';
 import Defense from './Defense';
 import TypeLabel from './TypeLabel';
-import { IDefense, IStat, IPokemonDetail } from '../utils/interfaces';
+import { IDefense, IStat, IPokemonDetail, IAbility } from '../utils/interfaces';
 
 const useStyles = makeStyles({
   table: {
@@ -16,14 +17,21 @@ const useStyles = makeStyles({
   center: {
     display: 'flex',
     alignItems: 'center'
+  },
+  expansionPanel: {
+    maxWidth: '400px'
+  },
+  mb0: {
+    marginBottom: '0px'
   }
 });
 
-type Props = {
+interface IPokemonDetailProps {
   pokemonDetail: IPokemonDetail | null;
-};
+  showAbilities?: boolean;
+}
 
-const PokemonDetail = ({ pokemonDetail }: Props) => {
+const PokemonDetail: React.FC<IPokemonDetailProps> = ({ pokemonDetail, showAbilities = false }) => {
   const classes = useStyles();
 
   return (
@@ -56,6 +64,25 @@ const PokemonDetail = ({ pokemonDetail }: Props) => {
           ))}
         </Grid>
       </Grid>
+      {showAbilities && (
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6}>
+            <h4>Abilities</h4>
+            {pokemonDetail?.abilities.map((ab: IAbility) => (
+              <ExpansionPanel key={ab.name} className={classes.expansionPanel}>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <strong className="capitalize">
+                    <p className={classes.mb0}>{ab.name}</p>
+                  </strong>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <p className={classes.mb0}>{ab.effect}</p>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            ))}
+          </Grid>
+        </Grid>
+      )}
     </React.Fragment>
   );
 };

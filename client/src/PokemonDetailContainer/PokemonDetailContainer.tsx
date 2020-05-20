@@ -41,7 +41,7 @@ const PokemonDetailContainer: React.FC = () => {
     return <ErrorUnknown />;
   }
 
-  return <PokemonDetail pokemonDetail={pokemonDetail} />;
+  return <PokemonDetail pokemonDetail={pokemonDetail} showAbilities={true} />;
 };
 
 export default PokemonDetailContainer;

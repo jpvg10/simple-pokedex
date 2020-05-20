@@ -62,7 +62,7 @@ export const getPokemon: RequestHandler = async (req, res) => {
     const abilityResponses = await Promise.all(abilityPromises);
     const arrayAbilities = abilityResponses.map((response: any) => {
       return {
-        name: response.data.name,
+        name: response.data.name.replace('-', ' '),
         effect: response.data.effect_entries[0].effect
       };
     });
