@@ -20,6 +20,8 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).send({ error: err.message });
 });
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log('Server running');
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
