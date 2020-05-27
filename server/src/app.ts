@@ -1,8 +1,13 @@
 import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
 import routes from './routes';
 
 const app = express();
+
+app.use(helmet());
+app.use(morgan('dev'));
 
 // static
 app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')));
