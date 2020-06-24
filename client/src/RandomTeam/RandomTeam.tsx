@@ -29,6 +29,8 @@ const RandomTeam: React.FC = () => {
   const [pokedexes, setPokedexes] = useState<IPokedex[]>([]);
   const [selectedPokedex, setSelectedPokedex] = useState('');
   const [pokedexRequestStatus, setPokedexRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
+  const [team, setTeam] = useState<IPokemonPicture[]>([]);
+  const [teamRequestStatus, setTeamRequestStatus] = useState<ERequestStatus>(ERequestStatus.NOT_LOADED);
 
   useEffect(() => {
     const loadPokedex = async () => {
@@ -48,9 +50,6 @@ const RandomTeam: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedPokedex(event.target.value as string);
   };
-
-  const [team, setTeam] = useState<IPokemonPicture[]>([]);
-  const [teamRequestStatus, setTeamRequestStatus] = useState<ERequestStatus>(ERequestStatus.NOT_LOADED);
 
   const onClickGo = async () => {
     try {

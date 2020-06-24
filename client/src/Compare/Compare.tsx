@@ -26,6 +26,10 @@ const Compare: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<string[]>([]);
   const [listRequestStatus, setListRequestStatus] = useState<ERequestStatus>(ERequestStatus.LOADING);
   const [selected, setSelected] = useState<string[]>(['', '']);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [pokemonData, setPokemonData] = useState<IPokemonDetail[]>([]);
+  const lastCalledRef = useRef<string[]>(['', '']);
+  const [pokemonRequestStatus, setPokemonRequestStatus] = useState<ERequestStatus>(ERequestStatus.NOT_LOADED);
 
   useEffect(() => {
     const loadPokemonList = async () => {
@@ -42,8 +46,6 @@ const Compare: React.FC = () => {
     loadPokemonList();
   }, []);
 
-  const [showError, setShowError] = useState<boolean>(false);
-
   const handler = (index: number) => (event: any, value: string | null): void => {
     const newSelected = [...selected];
     newSelected[index] = value ? value : '';
@@ -52,10 +54,6 @@ const Compare: React.FC = () => {
     }
     setSelected(newSelected);
   };
-
-  const [pokemonData, setPokemonData] = useState<IPokemonDetail[]>([]);
-  const lastCalledRef = useRef<string[]>(['', '']);
-  const [pokemonRequestStatus, setPokemonRequestStatus] = useState<ERequestStatus>(ERequestStatus.NOT_LOADED);
 
   const onClickGo = async () => {
     if (selected[0] && selected[1]) {
