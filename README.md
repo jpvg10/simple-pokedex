@@ -17,4 +17,4 @@ Functionalities are:
 * Compare the stats and defenses of two given Pokémon
 * Generate a random team of 6 Pokémon
 
-You can try it out here: [https://simple-pokedex.herokuapp.com/](https://simple-pokedex.herokuapp.com/)
+You can try it out here: [https://simple-pokedex-inky.vercel.app/](https://simple-pokedex-inky.vercel.app/)
