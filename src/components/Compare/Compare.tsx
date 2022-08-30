@@ -46,14 +46,16 @@ const Compare: React.FC = () => {
     loadPokemonList();
   }, []);
 
-  const handler = (index: number) => (event: any, value: string | null): void => {
-    const newSelected = [...selected];
-    newSelected[index] = value ? value : '';
-    if (newSelected[0] && newSelected[1]) {
-      setShowError(false);
-    }
-    setSelected(newSelected);
-  };
+  const handler =
+    (index: number) =>
+    (event: any, value: string | null): void => {
+      const newSelected = [...selected];
+      newSelected[index] = value ? value : '';
+      if (newSelected[0] && newSelected[1]) {
+        setShowError(false);
+      }
+      setSelected(newSelected);
+    };
 
   const onClickGo = async () => {
     if (selected[0] && selected[1]) {
