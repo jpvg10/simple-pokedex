@@ -17,7 +17,7 @@ const Error404: React.FC = () => {
   return (
     <React.Fragment>
       <img src={Pikachu} alt="404 error" className={classes.image} />
-      <p>Opps! It seems the page you're looking for doesn't exist</p>
+      <p>{"Opps! It seems the page you're looking for doesn't exist"}</p>
       <Button variant="outlined" color="primary" onClick={history.goBack}>
         Go back
       </Button>

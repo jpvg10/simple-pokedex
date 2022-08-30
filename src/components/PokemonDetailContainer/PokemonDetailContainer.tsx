@@ -8,7 +8,7 @@ import { IPokemonDetail } from '../../utils/interfaces';
 import { ERequestStatus } from '../../utils/enums';
 
 const PokemonDetailContainer: React.FC = () => {
-  const { pokemon } = useParams();
+  const { pokemon } = useParams<any>();
   const history = useHistory();
 
   const [pokemonDetail, setPokemonDetail] = useState<IPokemonDetail | null>(null);
@@ -21,7 +21,7 @@ const PokemonDetailContainer: React.FC = () => {
         const detail = await getPokemonDetail(pokemonName);
         setPokemonDetail(detail);
         setRequestStatus(ERequestStatus.LOADED);
-      } catch (e) {
+      } catch (e: any) {
         if (e && e.response && e.response.status === 404) {
           history.replace('/404');
         } else {

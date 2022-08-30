@@ -1,5 +1,9 @@
-import axios from 'axios';
+import Axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 import { IPokedex, IPokedexDetail, IPokemonPicture, IPokemonDetail } from '../utils/interfaces';
+
+const axiosInstance = Axios.create();
+const axios = setupCache(axiosInstance);
 
 export const getPoxedexes = async (): Promise<IPokedex[]> => {
   const result = await axios.get('https://pokeapi.co/api/v2/pokedex/');

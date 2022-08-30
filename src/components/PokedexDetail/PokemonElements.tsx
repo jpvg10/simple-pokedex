@@ -17,7 +17,7 @@ interface IPokemonElementsProps {
   classes: any;
 }
 
-class PokemonElements extends React.PureComponent<IPokemonElementsProps, {}> {
+class PokemonElements extends React.PureComponent<IPokemonElementsProps, unknown> {
   render() {
     const { pokemonToDisplay, classes } = this.props;
     const elements = pokemonToDisplay.map((poke: IPokemonBasic) => {
