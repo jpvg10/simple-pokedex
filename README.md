@@ -6,7 +6,6 @@ I used:
 
 * [TypeScript](https://github.com/Microsoft/TypeScript)
 * [React](https://github.com/facebook/react)
-* [Express](https://github.com/expressjs/express)
 * [Axios](https://github.com/axios/axios)
 * [Material-UI](https://github.com/mui-org/material-ui)
 * And of course: [The PokéAPI](https://pokeapi.co/) !
