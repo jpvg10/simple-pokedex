@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TableRow, TableCell, withStyles } from '@material-ui/core';
-import { IPokemonBasic } from '../utils/interfaces';
+import { IPokemonBasic } from '../../utils/interfaces';
 
 const styles = () => ({
   link: {

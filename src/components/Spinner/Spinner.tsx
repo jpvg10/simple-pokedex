@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import { ESpinnerSize } from '../utils/enums';
+import { ESpinnerSize } from '../../utils/enums';
 import './Spinner.css';
 
 const useStyles = makeStyles({

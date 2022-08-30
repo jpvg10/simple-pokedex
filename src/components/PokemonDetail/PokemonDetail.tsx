@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StatProgressBar from './StatProgressBar';
 import Defense from './Defense';
 import TypeLabel from './TypeLabel';
-import { IDefense, IStat, IPokemonDetail, IAbility } from '../utils/interfaces';
+import { IDefense, IStat, IPokemonDetail, IAbility } from '../../utils/interfaces';
 
 const useStyles = makeStyles({
   table: {

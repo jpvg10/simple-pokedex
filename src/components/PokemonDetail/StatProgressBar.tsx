@@ -1,5 +1,5 @@
 import React from 'react';
-import { IStat } from '../utils/interfaces';
+import { IStat } from '../../utils/interfaces';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({

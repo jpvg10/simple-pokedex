@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import PokemonDetail from '../PokemonDetail/PokemonDetail';
+import PokemonDetail from '../PokemonDetail';
 import ErrorUnknown from '../ErrorUnknown';
-import { getPokemonDetail } from '../utils/api';
-import { IPokemonDetail } from '../utils/interfaces';
-import { ERequestStatus } from '../utils/enums';
 import Spinner from '../Spinner';
+import { getPokemonDetail } from '../../utils/api';
+import { IPokemonDetail } from '../../utils/interfaces';
+import { ERequestStatus } from '../../utils/enums';
 
 const PokemonDetailContainer: React.FC = () => {
   const { pokemon } = useParams();

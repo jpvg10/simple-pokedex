@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import TypeLabel from './TypeLabel';
-import { IDefense } from '../utils/interfaces';
+import { IDefense } from '../../utils/interfaces';
 
 const useStyles = makeStyles({
   div: {
