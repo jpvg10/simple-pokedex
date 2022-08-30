@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Grid, makeStyles, List, ListItem, ListItemText, Card, CardContent } from '@material-ui/core';
 import pokedex from './pokedex.png';
 import ErrorUnknown from '../ErrorUnknown';
-import { getPoxedexes } from '../../utils/api';
+import { getPoxedexes } from '../../api';
 import { IPokedex } from '../../utils/interfaces';
 import { ERequestStatus } from '../../utils/enums';
 import Spinner from '../Spinner';

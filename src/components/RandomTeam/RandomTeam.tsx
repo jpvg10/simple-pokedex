@@ -4,7 +4,7 @@ import badges from './badges.png';
 import Pokemon from './Pokemon';
 import ErrorUnknown from '../ErrorUnknown';
 import Spinner from '../Spinner';
-import { getPoxedexes, getRandomTeam } from '../../utils/api';
+import { getPoxedexes, getRandomTeam } from '../../api';
 import { IPokedex, IPokemonPicture } from '../../utils/interfaces';
 import { ERequestStatus } from '../../utils/enums';
 

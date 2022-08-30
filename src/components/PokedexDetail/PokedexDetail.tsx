@@ -19,7 +19,7 @@ import debounce from 'lodash.debounce';
 import PokemonElements from './PokemonElements';
 import ErrorUnknown from '../ErrorUnknown';
 import Spinner from '../Spinner';
-import { getPokedexDetail } from '../../utils/api';
+import { getPokedexDetail } from '../../api';
 import { IPokemonBasic, IPokedexDetail } from '../../utils/interfaces';
 import { ERequestStatus, ESpinnerSize } from '../../utils/enums';
 

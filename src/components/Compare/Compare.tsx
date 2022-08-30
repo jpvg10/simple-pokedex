@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Grid, Button, TextField, makeStyles } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { getPokedexDetail, getPokemonDetail } from '../../utils/api';
+import { getPokedexDetail, getPokemonDetail } from '../../api';
 import { IPokemonBasic, IPokemonDetail } from '../../utils/interfaces';
 import PokemonDetail from '../PokemonDetail';
 import ErrorUnknown from '../ErrorUnknown';

@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import PokemonDetail from '../PokemonDetail';
 import ErrorUnknown from '../ErrorUnknown';
 import Spinner from '../Spinner';
-import { getPokemonDetail } from '../../utils/api';
+import { getPokemonDetail } from '../../api';
 import { IPokemonDetail } from '../../utils/interfaces';
 import { ERequestStatus } from '../../utils/enums';
 
